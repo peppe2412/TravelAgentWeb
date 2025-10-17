@@ -19,6 +19,9 @@ h3 {
 
 .chat-box {
     width: 700px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-height: 70vh;
 }
 
 @media (max-width: 768px) {
@@ -34,9 +37,11 @@ h3 {
 }
 
 .content-user-container {
-    width: 700px;
+    width: 500px;
     display: flex;
     justify-content: end;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .content-message-user {
