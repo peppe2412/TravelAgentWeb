@@ -3,11 +3,11 @@
         @forelse ($chatMessages as $key => $chatMessage)
             @if (isset($chatMessage['role']) && isset($chatMessage['content']))
                 @if ($chatMessage['role'] == 'user')
-                <div class="content-user-container">
-                    <div class="content-message-user">
-                        <p class="m-0 fs-5">{{ $chatMessage['content'] }}</p>
+                    <div class="content-user-container">
+                        <div class="content-message-user">
+                            <p class="m-0 fs-5">{{ $chatMessage['content'] }}</p>
+                        </div>
                     </div>
-                </div>
                 @elseif ($chatMessage['role'] == 'assistant')
                     <div wire:key="{{ $key }}" class="ai-message-container mt-4">
                         <div class="ai-message-content">
@@ -26,8 +26,8 @@
                 <input class="form-control input-message fs-5" wire:model.live="currentMessage" type="text"
                     placeholder="Inserisci messaggio....">
                 @error('currentMessage')
-                    <div class="d-flex justify-content-center mt-2">
-                        <span class="error-span">{{ $message }}</span>
+                    <div class="error-span-box">
+                        <span class="error-span fs-4">{{ $message }}</span>
                     </div>
                 @enderror
             </div>

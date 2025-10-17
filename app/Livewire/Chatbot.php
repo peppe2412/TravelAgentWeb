@@ -38,7 +38,13 @@ class Chatbot extends Component
     {
         try {
             $response = Http::timeout(60)->post('http://127.0.0.1:8080/chat/travel-agent', [
-                'messages' => $this->chatMessages
+                'messages' => [
+
+                    [
+                        'role' => 'user',
+                        'content' => $this->userPrompt
+                    ]
+                ]
             ]);
 
             if ($response->successful()) {
@@ -46,19 +52,19 @@ class Chatbot extends Component
 
                 logger()->info('API Raw Response', $content);
 
-                if (isset($content['response'])) {
+                if (!empty($content['response'])) {
                     $messages = collect($content['response']);
 
-                    $filteredMessages = $messages->filter(function ($message) {
-                        return isset($message['type']) && $message['type'] === 'ai';
-                    })->map(function ($message) {
-                        return [
-                            'role' => 'assistant',
-                            'content' => $message['content'] ?? ''
-                        ];
+                    $ai_messages = $messages->filter(function ($mess) {
+                        return isset($mess['type'], $mess['content']) && $mess['type'] == 'ai';
                     });
 
-                    $this->chatMessages = array_merge($this->chatMessages, $filteredMessages->toArray());
+                    foreach ($ai_messages as $mess) {
+                        $this->chatMessages[] = [
+                            'role' => 'assistant',
+                            'content' => $mess['content']
+                        ];
+                    }
                 }
             }
         } catch (\Exception $e) {

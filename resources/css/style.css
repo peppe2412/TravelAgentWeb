@@ -1,4 +1,4 @@
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,14 +21,14 @@ h3 {
     width: 700px;
 }
 
-@media (max-width: 768px){
-    .chat-box{
+@media (max-width: 768px) {
+    .chat-box {
         width: 400px;
     }
 }
 
-@media (max-width: 1600px){
-    .chat-box{
+@media (max-width: 1600px) {
+    .chat-box {
         width: 600px;
     }
 }
@@ -44,6 +44,18 @@ h3 {
     border-radius: 18px;
     width: fit-content;
     padding: 8px;
+    animation: message-user-animation 0.3s ease-out;
+}
+
+@keyframes message-user-animation{
+    from{
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .ai-message-container {
@@ -57,9 +69,21 @@ h3 {
     border-radius: 18px;
     width: fit-content;
     padding: 8px;
+    animation: ai-message-animation 0.3s ease-out;
 }
 
-.main-form{
+@keyframes ai-message-animation{
+    from{
+        opacity: 0;
+        transform: translate3d(-20px);
+    }
+    to{
+        opacity: 1;
+        transform: translate3d(0);
+    }
+}
+
+.main-form {
     position: fixed;
     bottom: 50px;
     left: 0;
@@ -83,13 +107,25 @@ h3 {
     border-radius: 50px;
 }
 
+.error-span-box {
+    display: flex;
+    justify-content: center;
+}
+
 .error-span {
-    background-color: rgb(242, 217, 217);
-    border: 1px solid rgb(247, 44, 44);
-    padding: 7px;
-    width: 500px;
-    text-align: center;
-    border-radius: 20px;
+    color: rgb(193, 15, 15);
+    animation: error-span-effect 0.3s ease-out;
+}
+
+@keyframes error-span-effect{
+    from{
+        opacity: 0;
+        transform: translateZ(-20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateZ(0);
+    }
 }
 
 .btn-sidebar {
